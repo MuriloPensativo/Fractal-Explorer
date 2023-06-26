@@ -1,6 +1,5 @@
 import pygame as pg
 import numpy as np
-import math
 import numba
 
 #settings
@@ -67,13 +66,11 @@ class App:
             if pg.mouse.get_pressed()[0] == True:
                 self.fractal.x_offset += x
                 self.fractal.y_offset += y
-            else:
-                pg.mouse.get_rel()
 
             for event in pg.event.get():
                 if event.type == pg.MOUSEWHEEL:
                     self.fractal.zoom /= 1.1 ** event.y
-                    self.fractal.max_iter *= 1.05 ** event.y
+                    self.fractal.max_iter *= 1.03 ** event.y
                     self.fractal.x_offset *= 1.1 ** event.y
                     self.fractal.y_offset *= 1.1 ** event.y
                     print(self.fractal.zoom, self.fractal.max_iter, event.y)
@@ -82,7 +79,6 @@ class App:
                     
             self.clock.tick()
             pg.display.set_caption(f'FPS: {self.clock.get_fps() :.2f}')
-
 
 if __name__ == '__main__':
     app = App()
